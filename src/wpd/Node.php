@@ -139,7 +139,10 @@ abstract class Node implements \IteratorAggregate
 
     public function getId()
     {
-        return $this->getAttr('id');
+        $id =  $this->getAttr('id');
+        if($id == "")
+            $id = null;
+        return $id;
     }
 
     public function setId($value)
@@ -386,7 +389,7 @@ abstract class Node implements \IteratorAggregate
                 {
                     $tmpNode = clone  $realNode;
                     $tmpNode->setDriverElement($elements[$i]);
-                    $pgen = $parent->getIterator();
+                    $pgen = $node->getIterator();
                     foreach ($pgen as $pnode)
                     {
                         $tmpNode->addElement(clone $pnode);
@@ -410,7 +413,6 @@ abstract class Node implements \IteratorAggregate
             }
             catch (NoSuchElementException $e)
             {
-               
                 $xpath = Impl::getBlurXpath($xpath);
                 $element = $driver->findElement(WebDriverBy::xpath($xpath));
                 $node->setBlur(true);

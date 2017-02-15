@@ -25,7 +25,7 @@ class Elements extends Node
      * @param $index
      * @return Node|null
      */
-    public function getByIndex($index)
+    public function getElementByIndex($index)
     {
         return isset($this->elements[$index]) ? $this->elements[$index] : null; 
     }
