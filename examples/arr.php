@@ -1,0 +1,10 @@
+<?php
+/**
+ * User: ZZCTMAC
+ * Date: 2017/2/15
+ * Time: 21:29
+ */
+$a1 = array('zzc', 'lsh');
+$a2 = array('lsh', 'zzc');
+
+print_r(array_diff($a1, $a2));
