@@ -30,7 +30,7 @@ namespace easy
 
     class DList extends Page
     {
-        protected $thumb = "ul>li*n";
+        protected $thumb = "ul>li*2";
         protected $urlPattern = "/list.html";
     }
 }
