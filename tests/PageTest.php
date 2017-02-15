@@ -76,7 +76,7 @@ namespace {
             $page->open();
             $htmlTree = $page->getHtmlTree();
             $btn = $htmlTree->getElementById('btn');
-            $alert = $btn->click();
+            $alert = $btn->click(1);
             $this->assertTrue($alert != null);
             $this->assertEquals('ca', $alert->getText());
             $alert->click();

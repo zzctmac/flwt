@@ -9,6 +9,7 @@ namespace flwt\thumb\xpath;
 
 
 use flwt\thumb\IBase;
+use flwt\thumb\MultiNode;
 use flwt\wpd\Node;
 
 class Impl implements IBase
@@ -23,6 +24,7 @@ class Impl implements IBase
     {
         //TODO: multi node
 
+
         $thumb = self::getSingleThumb($root);
         if($step == 0)
         {
@@ -30,10 +32,19 @@ class Impl implements IBase
         }
         if($root === $child)
         {
-            $twinNumber = $root->getTwinNumber($child, $twinIndex);
-            if($twinNumber > 0)
+            if($root instanceof MultiNode)
             {
-                $thumb .= '['. ($twinIndex + 1) .']';
+                $multiNode = $root;
+                $root = $multiNode->getRealNode();
+                $thumb = self::getSingleThumb($root);
+            }
+            else
+            {
+                $twinNumber = $root->getTwinNumber($child, $twinIndex);
+                if($twinNumber > 0 && $root->getIndexByMulti() == null)
+                {
+                    $thumb .= '['. ($twinIndex + 1) .']';
+                }
             }
             return  $thumb;
         }
@@ -54,6 +65,11 @@ class Impl implements IBase
                 if($tmp !== null)
                 {
                     $delimit = $element->isBlur() ? "//" : "/";
+                    $multiIndex = $element->getIndexByMulti();
+                    if($multiIndex != null)
+                    {
+                        $tmp .= "[" . ($multiIndex+1) . "]";
+                    }
                     return $thumb . $delimit . $tmp;
 
                 }

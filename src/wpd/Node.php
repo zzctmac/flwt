@@ -208,7 +208,10 @@ abstract class Node implements \IteratorAggregate
     protected  static function clickResp($wait = 0)
     {
         $page = PageContainer::top();
-        $alert = $page->getAlert($wait);
+        if($wait)
+            $alert = $page->getAlert($wait);
+        else
+            $alert = null;
         if($alert != null)
         {
             $alert->setClickCallback(function(){
@@ -350,6 +353,8 @@ abstract class Node implements \IteratorAggregate
             $element->showTree($step + 1, $delimit, $line);
     }
 
+
+
     use XPath;
 
     public static function loadInfoFromDriver(Node $node, WebDriver $driver)
@@ -369,6 +374,34 @@ abstract class Node implements \IteratorAggregate
             // TODO: multi node
             if($node instanceof MultiNode)
             {
+                $elements = $driver->findElements(WebDriverBy::xpath($xpath));
+                $elemCount = count($elements);
+                $realNum = $node->getRealNum();
+                $realNum = !is_numeric($realNum) ? $elemCount : intval($realNum);
+                $realNum = min($realNum, $elemCount);
+                $parent = $node->getParent();
+                $parent->removeElement($node);
+                $realNode = $node->getRealNode();
+                for($i = 0; $i < $realNum; $i++)
+                {
+                    $tmpNode = clone  $realNode;
+                    $tmpNode->setDriverElement($elements[$i]);
+                    $pgen = $parent->getIterator();
+                    foreach ($pgen as $pnode)
+                    {
+                        $tmpNode->addElement(clone $pnode);
+                    }
+                    $parent->addElement($tmpNode);
+                    $pgen = $tmpNode->getIterator();
+                    foreach ($pgen as $pnode)
+                    {
+                        self::loadInfoFromDriver($pnode, $driver);
+                    }
+                }
+                
+                return ;
+
+
                 break;
             }
             
@@ -498,6 +531,9 @@ abstract class Node implements \IteratorAggregate
         return $isSon ? $num : 0;
     }
 
+    /**
+     * @var Node
+     */
     protected $parent;
     public function setParent($root)
     {
@@ -509,5 +545,40 @@ abstract class Node implements \IteratorAggregate
         return $this->parent;
     }
 
+    public function getParentIndex()
+    {
+        if($this->parent == null)
+        {
+            return -1;
+        }
+        $gen = $this->parent->getIterator();
+        foreach ($gen as $index=>$node)
+        {
+            if($node === $this)
+                return $index;
+        }
+
+        return -1;
+    }
+
+    public function __clone() {
+        foreach ($this->elements as &$a) {
+            $a = clone $a;
+        }
+    }
+
+    protected $multiIndex = null;
+    public function getIndexByMulti()
+    {
+        return $this->multiIndex;
+    }
+
+    /**
+     * @param null $multiIndex
+     */
+    public function setMultiIndex($multiIndex)
+    {
+        $this->multiIndex = $multiIndex;
+    }
 
 }

@@ -29,6 +29,16 @@ class MultiNode extends Node
         $this->element = $element;
         $this->num = $num;
     }
+    
+    public function getRealNode()
+    {
+        return $this->element;
+    }
+    
+    public function getRealNum()
+    {
+        return $this->num;
+    }
 
     public function showTree($step = 0, $delimit = "   ", $line = "\n")
     {
