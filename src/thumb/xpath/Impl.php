@@ -22,10 +22,12 @@ class Impl implements IBase
 
     public function getThumb(Node $root, Node $child = null, $step = 0)
     {
-        //TODO: multi node
-
-
         $thumb = self::getSingleThumb($root);
+        $multiIndex = $root->getIndexByMulti();
+        if($multiIndex !== null)
+        {
+            $thumb .= '[' . ($multiIndex + 1) . ']';
+        }
         if($step == 0)
         {
             $thumb = '/' . $thumb;
@@ -41,9 +43,9 @@ class Impl implements IBase
             else
             {
                 $twinNumber = $root->getTwinNumber($child, $twinIndex);
-                if($twinNumber > 0 && $root->getIndexByMulti() == null)
+                if ($twinNumber > 0 )
                 {
-                    $thumb .= '['. ($twinIndex + 1) .']';
+                    $thumb .= '[' . ($twinIndex + 1) . ']';
                 }
             }
             return  $thumb;
@@ -65,11 +67,6 @@ class Impl implements IBase
                 if($tmp !== null)
                 {
                     $delimit = $element->isBlur() ? "//" : "/";
-                    $multiIndex = $element->getIndexByMulti();
-                    if($multiIndex != null)
-                    {
-                        $tmp .= "[" . ($multiIndex+1) . "]";
-                    }
                     return $thumb . $delimit . $tmp;
 
                 }

@@ -295,7 +295,7 @@ abstract class Node implements \IteratorAggregate
     /**
      * @param $name
      * @param $value
-     * @return Node[]
+     * @return Elements
      */
     public function getElementsByAttr($name, $value)
     {
@@ -374,7 +374,6 @@ abstract class Node implements \IteratorAggregate
             
             $xpath = $node->getXpath();
             
-            // TODO: multi node
             if($node instanceof MultiNode)
             {
                 $elements = $driver->findElements(WebDriverBy::xpath($xpath));
@@ -390,6 +389,7 @@ abstract class Node implements \IteratorAggregate
                     $tmpNode = clone  $realNode;
                     $tmpNode->setDriverElement($elements[$i]);
                     $pgen = $node->getIterator();
+                    $tmpNode->setMultiIndex($i);
                     foreach ($pgen as $pnode)
                     {
                         $tmpNode->addElement(clone $pnode);
@@ -581,6 +581,16 @@ abstract class Node implements \IteratorAggregate
     public function setMultiIndex($multiIndex)
     {
         $this->multiIndex = $multiIndex;
+    }
+
+    public function clear()
+    {
+        $this->driverElement = null;
+        $gen = $this->getIterator();
+        foreach ($gen as $item)
+        {
+            $item->clear();
+        }
     }
 
 }

@@ -55,7 +55,7 @@ class NodeTest extends PHPUnit_Framework_TestCase
 
 
         $elements = $node->getElementsByAttr('class', 'c');
-        $son = $elements->getByIndex(0);
+        $son = $elements->getElementByIndex(0);
         $this->assertEquals($son->getId(), 'name');
     }
 

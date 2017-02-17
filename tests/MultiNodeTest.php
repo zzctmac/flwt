@@ -16,9 +16,20 @@ namespace {
             $page = new DList();
             $page->open();
             $htmlTree = $page->getHtmlTree();
+            $as = $htmlTree->getElementsByTagName('a');
+            $a = $as->getElementByIndex(0);
+            $this->assertEquals('baidu', $a->getText());
+            $baiduPage = $a->click();
+            $this->assertEquals("https://www.baidu.com/", $baiduPage->getCurrentUrl());
+            unset($a);
+            unset($as);
+
+            $page->open();
             $lis = $htmlTree->getElementsByTagName('li');
-            $li = $lis->getElementByIndex(0);
-            $this->assertEquals(1, $li->getText());
+            $li = $lis->getElementByIndex(1);
+            $a = $li->getElementsByTagName('a')->getElementByIndex(0);
+            $this->assertEquals("weibo", $a->getText());
+            
         }
     }
 }
@@ -30,7 +41,7 @@ namespace easy
 
     class DList extends Page
     {
-        protected $thumb = "ul>li*2";
+        protected $thumb = "ul>li*n>a";
         protected $urlPattern = "/list.html";
     }
 }

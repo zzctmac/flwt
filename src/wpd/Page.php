@@ -209,5 +209,10 @@ class Page
         $driver->wait($m, $w);
     }
 
-    
+    public function clear()
+    {
+        $this->htmlTree->clear();
+    }
+
+
 }

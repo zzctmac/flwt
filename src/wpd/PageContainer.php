@@ -100,6 +100,7 @@ final class PageContainer
         if($page->getCurrentUrl() == $currentUrl)
             return ;
         $class = PageClassManager::map($currentUrl);
+        $page->clear();
         if($class == null)
         {
             $newPage = new Page();
