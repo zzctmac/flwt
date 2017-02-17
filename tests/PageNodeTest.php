@@ -41,19 +41,3 @@ namespace {
     }
 }
 
-namespace dfb
-{
-    use flwt\wpd\Page;
-
-    class Login extends Page
-    {
-        protected $thumb = "div.container>form#login-form>input#username+input#password+button.btn+div#error>span#error_tip";
-        protected $urlPattern = "/dfb/login.html";
-    }
-
-    class DList extends Page
-    {
-        protected $thumb = "div#container>button#logoutBtn";
-        protected $urlPattern ="/dfb/list";
-    }
-}

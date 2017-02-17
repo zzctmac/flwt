@@ -118,43 +118,6 @@ namespace {
 }
 
 
-namespace dfb
-{
-    use flwt\wpd\Page;
-
-    class Login extends Page
-    {
-        protected $thumb = "div.container>div.row>div.col-sm-6.col-sm-offset-6.form-box>div.form-bottom>form#login-form>(div.form-group>input#username)+(div.form-group>input#password)+button.btn+div#error>span#error_tip";
-        protected $urlPattern = "/dfb/login.html";
-    }
-
-    class DList extends Page
-    {
-        protected $thumb = "div#container>a[href=logout]>button#logoutBtn";
-        protected $urlPattern ="/dfb/list";
-    }
-}
 
 
-namespace page {
 
-    use flwt\wpd\Page;
-
-    class Login extends Page
-    {
-        protected $thumb = "form#login_form>input#username+input#password+input#submitBtn";
-        protected $urlPattern = "/login.html";
-    }
-    
-    class Alert extends Page
-    {
-        protected $thumb = 'div#tip';
-        protected $urlPattern = "/alert.html";
-    }
-
-    class ClickAlert extends Page
-    {
-        protected $thumb = "div#tip+button#btn";
-        protected $urlPattern = "/click_alert.html";
-    }
-}

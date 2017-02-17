@@ -18,7 +18,7 @@ class Impl implements IBase
 {
 
     
-    //TODO: element search
+    
     
     protected $suffix = "html>(head>title)+body";
     
