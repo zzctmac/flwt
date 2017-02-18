@@ -12,7 +12,7 @@ class EmmetQueryTest extends PHPUnit_Framework_TestCase
     {
         $page = new \dfb\Login();
         $page->open();
-        $title = \flwt\query\Emmet::get("#title")->getText();
-        $this->assertEquals('登陆', $title);
+        $title = \flwt\query\Emmet::get("#title");
+        $this->assertEquals('登陆', $title->getText());
     }
 }

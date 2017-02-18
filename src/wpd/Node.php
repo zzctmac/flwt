@@ -14,6 +14,7 @@ use Facebook\WebDriver\Exception\NoSuchElementException;
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
+use flwt\lib\Common;
 use flwt\thumb\MultiNode;
 use flwt\thumb\xpath\Impl;
 use flwt\wpd\search\XPath;
@@ -350,10 +351,29 @@ abstract class Node implements \IteratorAggregate
     {
         for($i = 0; $i < $step; $i++)
             echo $delimit;
-        echo $this->name . $line;
+        echo $this->name . $this->getAttrString(). $line;
         $gen = $this->getIterator();
         foreach ($gen as $element)
             $element->showTree($step + 1, $delimit, $line);
+    }
+    
+    private function getAttrString()
+    {
+        $arr = array();
+        foreach ($this->attrs as $k=>$v)
+        {
+            if(is_array($v))
+            {
+                $v = implode(' ', $v);
+            }
+            $arr[] = $k.'="'.$v . '"';
+            
+        }
+        if(count($arr) > 0)
+        {
+            return '[' . implode(',', $arr) . ']';
+        }
+        return '';
     }
 
 
@@ -458,6 +478,31 @@ abstract class Node implements \IteratorAggregate
     }
 
     protected $uselessForTwinAttrs = array();
+    
+    public function isSame(Node $node)
+    {
+        $nid = $node->getId();
+        $tid = $this->getId();
+        if($tid !== null && $nid === $tid)
+        {
+            return true;
+        }
+        $checkOnlyName = array('html', 'head', 'title', 'body');
+        $nname = strtolower($node->getName());
+        $tname = strtolower($node->getName());
+        do
+        {
+            if($nname !== $tname)
+                return false;
+
+            if(in_array($nname, $checkOnlyName))
+            {
+                return true;
+            }
+        }while(false);
+        return Common::arrayDiff($node->getAttrs(), $this->getAttrs());
+
+    }
 
     public function isTwin(Node $node, $checkText = false)
     {

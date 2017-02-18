@@ -178,7 +178,6 @@ class Impl implements IBase
         }
 
         $res = array_merge_recursive($res, self::handleEmmetNodeDelimit($handle, $tmp));
-
         return $res;
     }
 

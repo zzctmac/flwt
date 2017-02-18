@@ -12,5 +12,18 @@ use flwt\wpd\Node;
 
 class Normal extends Node
 {
+    protected $name = 'normal';
 
+   
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        if($name != '')
+        $this->name = $name;
+    }
+    
+    
 }

@@ -4,18 +4,19 @@
  * Date: 2017/2/15
  * Time: 21:29
  */
-$a1 = array('zzc', 'lsh');
-$a2 = array('lsh', 'zzc');
+$arr1 = array('name'=>'zzc', 'id'=>'1', 'class'=>array('tmac', 'zzc'));
+$arr2 = array('name'=>'zzc', 'id'=>'1', 'class'=>array('zzc', 'tmac'));
 
-print_r(array_diff($a1, $a2));
-
-$arr = array(1, 2, 3, 4, 1);
-
-foreach ($arr as $k=>$v)
+function cmp($a, $b)
 {
-    if($v == 1) {
-        $arr[] = 3;
-        $arr[] = 3;
+    if(!is_array($a))
+    {
+        return $a === $b ? 0 : 1;
     }
-    echo $k.'=>'.$v."\n";
+    if(!is_array($b))
+        return 1;
+    return count(array_diff($a, $b)) == 0 && count(array_diff($b, $a)) == 0 ? 0 : 1;
 }
+
+var_dump(array_udiff_assoc($arr1, $arr2, 'cmp'));
+var_dump(array_udiff_assoc($arr2, $arr1, 'cmp'));
