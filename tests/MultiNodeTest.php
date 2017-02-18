@@ -19,12 +19,10 @@ namespace {
             $as = $htmlTree->getElementsByTagName('a');
             $a = $as->getElementByIndex(0);
             $this->assertEquals('baidu', $a->getText());
-            $baiduPage = $a->click();
-            $this->assertEquals("https://www.baidu.com/", $baiduPage->getCurrentUrl());
             unset($a);
             unset($as);
 
-            $page->open();
+            
             $lis = $htmlTree->getElementsByTagName('li');
             $li = $lis->getElementByIndex(1);
             $a = $li->getElementsByTagName('a')->getElementByIndex(0);

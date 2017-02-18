@@ -97,7 +97,7 @@ namespace {
             $usernameInput = $htmlTree->getElementById('username');
             $passwordInput = $htmlTree->getElementById("password");
             $usernameInput->input('zzc');
-            $alert = $passwordInput->input('12345')->submit(1);
+            $alert = $passwordInput->input('12345')->submit(3);
 
 
             //print_r($driver->getWindowHandles());

@@ -28,7 +28,7 @@ namespace {
             $pwdInput = $htmlTree->getElementById('password');
             $nameInput->input('zzc');
             $pwdInput->input('12345')->submit();
-            $alert = $page->getAlert();
+            $alert = $page->getAlert(3);
             $listPage = $alert->click();
 
         }

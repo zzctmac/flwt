@@ -20,8 +20,8 @@ function cmp($a, $b)
 
 class Common
 {
-    public static function arrayDiff($arr1, $arr2)
+    public static function arraySame($arr1, $arr2)
     {
-        return count(array_udiff_assoc($arr1, $arr2, __NAMESPACE__ .  '\cmp')) == 0 && count(array_udiff_assoc($arr2, $arr1, __NAMESPACE__ . '\cmp')) == 0;
+        return count(array_udiff_assoc($arr1, $arr2, __NAMESPACE__ .  '\cmp')) == 0;
     }
 }

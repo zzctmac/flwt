@@ -26,7 +26,7 @@ namespace {
             $nameInput = $htmlTree->getElementById('username');
             $pwdInput = $htmlTree->getElementById('password');
             $nameInput->input('zzc');
-            $alert = $pwdInput->input('12345')->submit(1);
+            $alert = $pwdInput->input('12345')->submit(3);
 
             $listPage = $alert->click();
             $this->assertTrue($listPage instanceof DList);

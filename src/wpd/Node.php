@@ -491,7 +491,7 @@ abstract class Node implements \IteratorAggregate
         }
         $checkOnlyName = array('html', 'head', 'title', 'body');
         $nname = strtolower($node->getName());
-        $tname = strtolower($node->getName());
+        $tname = strtolower($this->getName());
         do
         {
             if($nname !== $tname)
@@ -502,7 +502,7 @@ abstract class Node implements \IteratorAggregate
                 return true;
             }
         }while(false);
-        return Common::arrayDiff($node->getAttrs(), $this->getAttrs());
+        return Common::arraySame($this->getAttrs(), $node->getAttrs());
 
     }
 

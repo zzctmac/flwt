@@ -33,7 +33,7 @@ trait ElementSearch
         {
             return ;
         }
-        if(!$originTree->isSame($tree))
+        if(!$tree->isSame($originTree))
         {
             $gen = $originTree->getIterator();
             foreach ($gen as $son)
