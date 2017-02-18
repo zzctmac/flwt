@@ -43,6 +43,8 @@ final class PageContainer
         {
             $this->stacks[$handle] = new \SplStack();
         }
+        if($this->stacks[$handle]->count() > 0 && $this->stacks[$handle]->top() === $page)
+            $page->clear();
         $this->stacks[$handle]->push($page);
     }
 

@@ -82,6 +82,8 @@ namespace {
             $alert->click();
         }
 
+
+
         public function test_redirect()
         {
             PageClassManager::addClass(\dfb\Login::class);
@@ -111,6 +113,13 @@ namespace {
             $newLogin = $element->click();
             $this->assertEquals('/dfb/login.html', $newLogin->getCurrentUrl());
             $this->assertTrue($newLogin instanceof \dfb\Login);
+        }
+
+        public function test_open_2()
+        {
+            $login = new \dfb\Login();
+            $login->open();
+            $login->open();
         }
 
 
