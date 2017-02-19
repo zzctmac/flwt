@@ -31,15 +31,3 @@ namespace {
         }
     }
 }
-
-namespace easy
-{
-
-    use flwt\wpd\Page;
-
-    class DList extends Page
-    {
-        protected $thumb = "ul>li*n>a";
-        protected $urlPattern = "/list.html";
-    }
-}

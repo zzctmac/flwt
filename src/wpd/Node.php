@@ -93,6 +93,11 @@ abstract class Node implements \IteratorAggregate
         return $this;
     }
 
+    public function setAttrByArr($name, $value)
+    {
+        $this->attrs[$name] = $value;
+    }
+
     public function setAttr($name, $value)
     {
         static $singleAttr = array('id', 'value');
@@ -382,8 +387,13 @@ abstract class Node implements \IteratorAggregate
 
     use XPath;
 
+    /**
+     * @param Node $node
+     * @param WebDriver $driver
+     */
     public static function loadInfoFromDriver(Node $node, WebDriver $driver)
     {
+        // TODO: lazy lOad WebDriverElement        
         do
         {
             $id = $node->getId();
@@ -456,11 +466,31 @@ abstract class Node implements \IteratorAggregate
     }
 
     /**
-     * @param mixed $driverElement
+     * @param WebDriverElement $driverElement
      */
     public function setDriverElement($driverElement)
     {
+        $this->initByDriverElement($driverElement);
         $this->driverElement = $driverElement;
+    }
+
+    /**
+     * @param WebDriverElement $driverElement
+     */
+    protected function initByDriverElement($driverElement)
+    {
+        do {
+            $class = $driverElement->getAttribute('class');
+            if($class == "")
+                break;
+            $classArr = explode(' ', $class);
+            if (count($classArr) > 1)
+            {
+                $this->setAttrByArr('class', $classArr);
+                break;
+            }
+            $this->attrs['class'] = $class;
+         }while(false);
     }
 
     /**

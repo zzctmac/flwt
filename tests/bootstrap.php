@@ -48,6 +48,19 @@ namespace dfb
         protected $urlPattern ="/dfb/list";
     }
 }
+
+namespace easy
+{
+
+    use flwt\wpd\Page;
+
+    class DList extends Page
+    {
+        protected $thumb = "ul>li*n>a";
+        protected $urlPattern = "/list.html";
+    }
+}
+
 namespace {
 
     use Facebook\WebDriver\Remote\DesiredCapabilities;
