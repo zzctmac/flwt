@@ -67,7 +67,7 @@ class Page
     public static function openNow($wait = 0)
     {
         $page = new static();
-        $page->open($wait);
+        call_user_func_array(array($page, 'open'), func_get_args());
         return $page;
     }
 
@@ -77,12 +77,13 @@ class Page
      */
     public function open($wait = 0)
     {
+        $args = func_get_args();
+        array_shift($args);
         $driver = Resource::getGlobalDriver();
         
-        $before = function() use($driver, $wait) {
-
-
-            $fullUrl = UrlHandler::getFullUrl($this->urlPattern);
+        $before = function() use($driver, $wait, $args) {
+            
+            $fullUrl = UrlHandler::getFullUrl($this->urlPattern, $args);
 
             $this->currentUrl = UrlHandler::removePrefix($fullUrl);
             

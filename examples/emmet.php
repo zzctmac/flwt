@@ -11,3 +11,11 @@ $thumb = new \flwt\thumb\emmet\Impl();
 
 $root = $thumb->getTree("#title");
 $root->showTree();
+
+$pattern = "(<[^/]*>)";
+
+$str = "/<zzc>/<abc>";
+
+preg_match_all($pattern, $str, $matches);
+
+print_r($matches);

@@ -10,9 +10,11 @@ namespace {
 
     use Facebook\WebDriver\WebDriverBy;
     use flwt\PageClassManager;
+    use flwt\query\Emmet;
     use flwt\Resource;
     use page\Alert;
     use page\ClickAlert;
+    use page\Detail;
     use page\Login;
 
     class PageTest extends PHPUnit_Framework_TestCase
@@ -122,6 +124,13 @@ namespace {
             $login->open();
         }
 
+        public function test_url_regex()
+        {
+
+            $page = Detail::openNow(0, 2, array('name'=>'zzc'));
+            $h1 = Emmet::get('h1');
+            $this->assertEquals('2', $h1->getText());
+        }
 
     }
 }

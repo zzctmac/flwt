@@ -36,6 +36,12 @@ namespace page {
         protected $thumb = "div#show+button#btn";
         protected $urlPattern = "/vis.html";
     }
+
+    class Detail extends Page
+    {
+        protected $thumb = "h1";
+        protected $urlPattern = "/detail/<id>.html";
+    }
 }
 
 namespace dfb
