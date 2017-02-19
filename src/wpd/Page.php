@@ -64,6 +64,13 @@ class Page
         $this->htmlTree = $this->thumbParser->getTree($this->thumb);
     }
 
+    public static function openNow()
+    {
+        $page = new static();
+        $page->open();
+        return $page;
+    }
+    
     /**
      * @return Alert|null
      */
@@ -212,6 +219,12 @@ class Page
     public function clear()
     {
         $this->htmlTree->clear();
+    }
+    
+    public function forceFresh()
+    {
+        $this->clear();
+        return $this->open();
     }
 
 

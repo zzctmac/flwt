@@ -30,6 +30,12 @@ namespace page {
         protected $thumb = "div#tip+button#btn";
         protected $urlPattern = "/click_alert.html";
     }
+
+    class Vis extends Page
+    {
+        protected $thumb = "div#show+button#btn";
+        protected $urlPattern = "/vis.html";
+    }
 }
 
 namespace dfb

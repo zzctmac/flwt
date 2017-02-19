@@ -28,15 +28,16 @@ class Alert extends Node
 
     /**
      * @param int $wait
+     * @param null $waitFor
      * @return Alert|\flwt\wpd\Page|null
      */
-    public function click($wait = 0)
+    public function click($wait = 0, $waitFor =  null)
     {
         $this->driverAlert->accept();
         if($this->clickCallback != null)
             call_user_func($this->clickCallback);
         
-      return self::clickResp($wait);
+      return self::clickResp($wait, $waitFor);
     }
 
     public function getText($cache = 0)

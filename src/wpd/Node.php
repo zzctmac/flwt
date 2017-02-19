@@ -17,6 +17,7 @@ use Facebook\WebDriver\WebDriverElement;
 use flwt\lib\Common;
 use flwt\thumb\MultiNode;
 use flwt\thumb\xpath\Impl;
+use flwt\wait\Alert;
 use flwt\wpd\search\XPath;
 
 abstract class Node implements \IteratorAggregate
@@ -74,6 +75,14 @@ abstract class Node implements \IteratorAggregate
      * @var WebDriverElement
      */
     protected $driverElement;
+
+    /**
+     * @return WebDriverElement
+     */
+    public function getDriverElement()
+    {
+        return $this->driverElement;
+    }
     
     
 
@@ -199,37 +208,35 @@ abstract class Node implements \IteratorAggregate
 
     /**
      * @param int $wait
+     * @param null $waitFor
      * @return nodes\Alert|Page|null
      */
-    public function click($wait = 0)
+    public function click($wait = 0, $waitFor = null)
     {
         if( $this->driverElement !== null )
         {
             $this->driverElement->click();
         }
-        return self::clickResp($wait);
+        return self::clickResp($wait, $waitFor);
     }
 
 
-    //TODO: wait for more event
+    
     /**
      * @param int $wait
+     * @param null $waitFor
      * @return nodes\Alert|Page|null
      */
-    protected  static function clickResp($wait = 0)
+    protected  static function clickResp($wait = 0, $waitFor = null)
     {
-        $page = PageContainer::top();
-        if($wait)
-            $alert = $page->getAlert($wait);
-        else
-            $alert = null;
-        if($alert != null)
-        {
-            $alert->setClickCallback(function(){
-               PageContainer::tryRedirect();
-            });
-            return $alert;
+        if($wait) {
+            if($waitFor == null)
+                $waitFor = Alert::create();
+            $waitRes  = $waitFor->getRes($wait);
+            if($waitRes != null)
+                return $waitRes;
         }
+        
 
         PageContainer::tryRedirect();
         return PageContainer::top();
@@ -237,15 +244,16 @@ abstract class Node implements \IteratorAggregate
 
     /**
      * @param int $wait
+     * @param null $waitFor
      * @return nodes\Alert|Page|null
      */
-    public function submit($wait = 0)
+    public function submit($wait = 0, $waitFor = null)
     {
         if( $this->driverElement !== null )
         {
             $this->driverElement->submit();
         }
-       return self::clickResp($wait);
+       return self::clickResp($wait, $waitFor);
     }
 
     
