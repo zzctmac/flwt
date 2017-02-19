@@ -209,7 +209,7 @@ abstract class Node implements \IteratorAggregate
     /**
      * @param int $wait
      * @param null $waitFor
-     * @return nodes\Alert|Page|null
+     * @return nodes\Alert|Page
      */
     public function click($wait = 0, $waitFor = null)
     {
@@ -225,7 +225,7 @@ abstract class Node implements \IteratorAggregate
     /**
      * @param int $wait
      * @param null $waitFor
-     * @return nodes\Alert|Page|null
+     * @return Node|Page
      */
     protected  static function clickResp($wait = 0, $waitFor = null)
     {
@@ -245,7 +245,7 @@ abstract class Node implements \IteratorAggregate
     /**
      * @param int $wait
      * @param null $waitFor
-     * @return nodes\Alert|Page|null
+     * @return Node|Page
      */
     public function submit($wait = 0, $waitFor = null)
     {
