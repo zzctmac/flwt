@@ -13,9 +13,10 @@ class WaitTest extends \PHPUnit_Framework_TestCase
 
     public function test_visibility()
     {
-        $page = \page\Vis::openNow();
+        \page\Vis::openNow();
         $btn = \flwt\query\Emmet::get('#btn');
-        $res = $btn->click(1, \flwt\wait\Visibility::create($btn));
-        $this->assertTrue($btn === $res);
+        $div = \flwt\query\Emmet::get('#show');
+        $res = $btn->click(1, \flwt\wait\Visibility::create($div));
+        $this->assertTrue($div === $res);
     }
 }
