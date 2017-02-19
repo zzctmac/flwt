@@ -127,7 +127,7 @@ namespace {
         public function test_url_regex()
         {
 
-            $page = Detail::openNow(0, 2, array('name'=>'zzc'));
+            Detail::openNowWithoutWait(2);
             $h1 = Emmet::get('h1');
             $this->assertEquals('2', $h1->getText());
         }

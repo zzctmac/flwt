@@ -64,6 +64,13 @@ class Page
         $this->htmlTree = $this->thumbParser->getTree($this->thumb);
     }
 
+    public static function openNowWithoutWait()
+    {
+        $args = func_get_args();
+        array_unshift($args, 0);
+        return call_user_func_array(array(static::class, 'openNow'), $args);
+    }
+    
     public static function openNow($wait = 0)
     {
         $page = new static();
