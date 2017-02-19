@@ -16,13 +16,15 @@ trait ElementSearch
 {
     /**
      * @param Node $tree
+     * @param Node|null $root
      * @return Elements
      */
-    public static function getElementsByHtmlTree(Node $tree)
+    public static function getElementsByHtmlTree(Node $tree, $root = null)
     {
         $elements = array();
         $page = PageContainer::top();
-        $root = $page->getHtmlTree();
+        if($root == null)
+            $root = $page->getHtmlTree();
         self::getElementsByHtmlTreeRec($root, $tree, $elements);
         return new Elements($elements);
     }

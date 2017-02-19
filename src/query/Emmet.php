@@ -8,7 +8,7 @@
 namespace flwt\query;
 
 
-use flwt\thumb\emmet\Impl;
+
 use flwt\wpd\Elements;
 use flwt\wpd\Node;
 
@@ -17,9 +17,10 @@ class Emmet implements IBase
 
     /**
      * @param $thumb
+     * @param Node|null $root
      * @return Node|null
      */
-    public static function get($thumb)
+    public static function get($thumb, $root = null)
     {
         $elements = self::getMulti($thumb);
         return $elements->getElementByIndex(0);
@@ -27,13 +28,14 @@ class Emmet implements IBase
 
     /**
      * @param $thumb
+     * @param Node|null $root
      * @return Elements|null
      */
-    public static function getMulti($thumb)
+    public static function getMulti($thumb, $root = null)
     {
         $thumbHandler = new EmmetHandler();
         $tree = $thumbHandler->getTree($thumb);
-        return self::getElementsByHtmlTree($tree);
+        return self::getElementsByHtmlTree($tree, $root);
     }
     
     use ElementSearch;
