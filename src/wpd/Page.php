@@ -64,21 +64,22 @@ class Page
         $this->htmlTree = $this->thumbParser->getTree($this->thumb);
     }
 
-    public static function openNow()
+    public static function openNow($wait = 0)
     {
         $page = new static();
-        $page->open();
+        $page->open($wait);
         return $page;
     }
-    
+
     /**
+     * @param int $wait
      * @return Alert|null
      */
-    public function open()
+    public function open($wait = 0)
     {
         $driver = Resource::getGlobalDriver();
         
-        $before = function() use($driver) {
+        $before = function() use($driver, $wait) {
 
 
             $fullUrl = UrlHandler::getFullUrl($this->urlPattern);
@@ -89,7 +90,7 @@ class Page
             PageContainer::push($this);
 
 
-            $alert = $this->getAlert(0);
+            $alert = $this->getAlert($wait);
             if ($alert != null) {
                 yield $alert;
             }
@@ -220,11 +221,27 @@ class Page
     {
         $this->htmlTree->clear();
     }
-    
-    public function forceFresh()
+
+    /**
+     * @param int $wait
+     * @return Alert|null
+     */
+    public function forceFresh($wait = 0)
     {
         $this->clear();
-        return $this->open();
+        $alert = $this->getAlert($wait);
+        $driver = Resource::getGlobalDriver();
+        $after = function() use($driver) {
+            self::loadInfoFromDriver($this, $driver);
+        };
+        if ($alert != null) {
+            $alert->setClickCallback($after);
+            return  $alert;
+        }
+
+        $after();
+        return $this;
+
     }
 
 
