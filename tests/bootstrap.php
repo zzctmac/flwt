@@ -42,6 +42,12 @@ namespace page {
         protected $thumb = "h1";
         protected $urlPattern = "/detail/<id>.html";
     }
+
+    class Reload extends Page
+    {
+        protected $thumb = "h1+button#btn";
+        protected $urlPattern = "/reload.html";
+    }
 }
 
 namespace dfb

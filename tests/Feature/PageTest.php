@@ -16,6 +16,7 @@ namespace {
     use page\ClickAlert;
     use page\Detail;
     use page\Login;
+    use page\Reload;
 
     class PageTest extends PHPUnit_Framework_TestCase
     {
@@ -130,6 +131,16 @@ namespace {
             Detail::openNowWithoutWait(2);
             $h1 = Emmet::get('h1');
             $this->assertEquals('2', $h1->getText());
+        }
+
+        public function test_reload()
+        {
+            $page = Reload::openNow();
+            $btn= Emmet::get('button');
+            $btn->click()->forceFresh();
+            $h1 = Emmet::get('h1');
+            $this->assertEquals('zzc', $h1->getText());
+
         }
 
     }
