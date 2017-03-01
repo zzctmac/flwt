@@ -28,8 +28,8 @@ Login(继承Page的子类)中的`thumb`属性用来展示页面元素的缩略�
 eg:
 ```php
 \dfb\Login::openNow();
-\flwt\query\Emmet::get('#username')->input('zzc');
-$alert = \flwt\query\Emmet::get('#password')->input('12345')->submit(1);
+\flwt\query\Emmet::get('#username')->input('username');
+$alert = \flwt\query\Emmet::get('#password')->input('password')->submit(1);
 $alert->click();
 
 ```
@@ -47,8 +47,8 @@ class PageTest extends extends PHPUnit_Framework_TestCase
     public function submitDataProvider()
     {
         $data = array(
-            array('zzc', '123456', 'success'),
-            array('zzc', '12345', 'failed')
+            array('u1', 'p1', 'success'),
+            array('u2', 'p2', 'failed')
         );
         return $data;
     }
