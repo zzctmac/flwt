@@ -26,12 +26,14 @@ class Valid extends \flwt\wpd\Page
 
 ### 初始化等预备工作
 
+eg:
+
 ```php
 
 
 /**
  创建webdriver实例
- 将用的Page类添加到PageClassManager（方便跳转到新页面自动找到对应的Page类）
+ 将用到的Page类添加到PageClassManager（方便跳转到新页面自动找到对应的Page类）
 
  etc
 
