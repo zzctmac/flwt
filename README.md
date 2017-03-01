@@ -63,9 +63,9 @@ class PageTest extends extends PHPUnit_Framework_TestCase
     {
 
         Login::openNow();
-        Emmet::get('#username')->input($name);
-        Emmet::get('#password')->input($password)->submit();
-        $tip = Emmet::get('#tip');
+        \flwt\query\Emmet::get('#username')->input($name);
+        \flwt\query\Emmet::get('#password')->input($password)->submit();
+        $tip = \flwt\query\Emmet::get('#tip');
         $this->assertEquals($expected, $tip->getText());
     }
 }
