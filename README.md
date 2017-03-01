@@ -30,6 +30,8 @@ eg:
 
 ```php
 
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 /**
  创建webdriver实例
@@ -40,9 +42,6 @@ eg:
  可以在phpunit中定义的bootstrap.php 做这些预备工作
 
 */
-use Facebook\WebDriver\Remote\DesiredCapabilities;
-use Facebook\WebDriver\Remote\RemoteWebDriver;
-
 
 
 $host = 'http://localhost:4444/wd/hub'; // this is the default
