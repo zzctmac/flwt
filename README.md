@@ -34,14 +34,11 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 /**
- 创建webdriver实例
- 将用到的Page类添加到PageClassManager（方便跳转到新页面自动找到对应的Page类）
-
- etc
-
- 可以在phpunit中定义的bootstrap.php 做这些预备工作
-
-*/
+ * 创建webdriver实例
+ * 将用到的Page类添加到PageClassManager（方便跳转到新页面自动找到对应的Page类）
+ * etc
+ * 可以在phpunit中定义的bootstrap.php 做这些预备工作
+**/
 
 
 $host = 'http://localhost:4444/wd/hub'; // this is the default
