@@ -1,6 +1,6 @@
 # Framework L Web Test
 
-**基于webdriver的前端测试框架**
+**基于webdriver的web测试框架**
 
 ## 使用步骤
 
