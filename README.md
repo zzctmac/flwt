@@ -24,6 +24,40 @@ class Valid extends \flwt\wpd\Page
 
 继承Page的子类中的`thumb`属性用来展示页面元素的缩略图，使用[Emmet](http://docs.emmet.io/)来表示。`urlPattern` 表示该页面url的格式。
 
+### 初始化等预备工作
+
+```php
+
+
+/**
+ 创建webdriver实例
+ 将用的Page类添加到PageClassManager（方便跳转到新页面自动找到对应的Page类）
+
+ etc
+
+ 可以在phpunit中定义的bootstrap.php 做这些预备工作
+
+*/
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
+
+
+
+$host = 'http://localhost:4444/wd/hub'; // this is the default
+
+
+$capabilities = DesiredCapabilities::chrome();
+$driver = RemoteWebDriver::create($host, $capabilities, 5000);
+
+\flwt\UrlHandler::setPrefix("http://localhost");
+
+\flwt\Resource::create($driver);
+
+PageClassManager::addClass(Login::class);
+PageClassManager::addClass(Valid::class);
+
+```
+
 ### 打开页面并模拟用户操作
 eg:
 ```php
@@ -40,8 +74,6 @@ eg:
 
 ```php
 
-PageClassManager::addClass(Login::class);
-PageClassManager::addClass(Valid::class);
 class PageTest extends PHPUnit_Framework_TestCase
 {
     public function submitDataProvider()
