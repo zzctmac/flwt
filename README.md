@@ -14,7 +14,7 @@ class Login extends \flwt\wpd\Page
     protected $urlPattern = "/login.html";
 }
 
-class Valid extends Page
+class Valid extends \flwt\wpd\Page
 {
     protected $thumb = "h1#tip";
     protected $urlPattern = "/valid.php";
