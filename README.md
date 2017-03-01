@@ -42,7 +42,7 @@ eg:
 
 PageClassManager::addClass(Login::class);
 PageClassManager::addClass(Valid::class);
-class PageTest extends extends PHPUnit_Framework_TestCase
+class PageTest extends PHPUnit_Framework_TestCase
 {
     public function submitDataProvider()
     {
