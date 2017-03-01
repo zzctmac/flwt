@@ -19,6 +19,12 @@ namespace page {
         protected $urlPattern = "/login.html";
     }
 
+    class Valid extends Page
+    {
+        protected $thumb = "h1#tip";
+        protected $urlPattern = "/valid.php";
+    }
+
     class Alert extends Page
     {
         protected $thumb = 'div#tip';

@@ -17,6 +17,7 @@ namespace {
     use page\Detail;
     use page\Login;
     use page\Reload;
+    use page\Valid;
 
     class PageTest extends PHPUnit_Framework_TestCase
     {
@@ -39,26 +40,30 @@ namespace {
             $this->assertEquals('login', $title);
         }
 
-        public function test_submit()
+        public function submitDataProvider()
         {
             $data = array(
                 array('zzc', '123456', 'success'),
                 array('zzc', '12345', 'failed')
             );
-            foreach ($data as $info)
-                $this->submitInfo($info);
+            return $data;
         }
 
-        private function submitInfo($info)
+        /**
+         * @dataProvider submitDataProvider
+         * @param $name
+         * @param $password
+         * @param $expected
+         */
+        public function test_submit($name, $password, $expected)
         {
-            $page = new Login();
-            $page->open();
-            $driver = \flwt\Resource::getGlobalDriver();
-            $htmlTree = $page->getHtmlTree();
-            $htmlTree->getElementById('username')->input($info[0]);
-            $htmlTree->getElementById('password')->input($info[1])->submit();
-            $tip = $driver->findElement(WebDriverBy::id('tip'));
-            $this->assertEquals($info[2], $tip->getText());
+            PageClassManager::addClass(Login::class);
+            PageClassManager::addClass(Valid::class);
+            Login::openNow();
+            Emmet::get('#username')->input($name);
+            Emmet::get('#password')->input($password)->submit();
+            $tip = Emmet::get('#tip');
+            $this->assertEquals($expected, $tip->getText());
         }
 
         public function test_alert()
@@ -141,6 +146,14 @@ namespace {
             $h1 = Emmet::get('h1');
             $this->assertEquals('zzc', $h1->getText());
 
+        }
+
+        public function test_l1()
+        {
+            \dfb\Login::openNow();
+            \flwt\query\Emmet::get('#username')->input('zzc');
+            $alert = \flwt\query\Emmet::get('#password')->input('12345')->submit(1);
+            $alert->click();
         }
 
     }
