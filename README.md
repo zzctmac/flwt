@@ -22,7 +22,7 @@ class Valid extends Page
 
 ```
 
-Login(继承Page的子类)中的`thumb`属性用来展示页面元素的缩略图，使用(Emmet)[http://docs.emmet.io/]来表示。`urlPattern` 表示该页面url的格式。
+继承Page的子类中的`thumb`属性用来展示页面元素的缩略图，使用[Emmet](http://docs.emmet.io/)来表示。`urlPattern` 表示该页面url的格式。
 
 ### 打开页面并模拟用户操作
 eg:
